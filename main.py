@@ -121,7 +121,15 @@ async def process_queue():
             await asyncio.sleep(1)
 
 #5. Enhanced Classplus DRM handling
- def fix_classplus_drm(url):
+def fix_classplus_drm(url):
+    # All code inside this function must be indented by 4 spaces
+    try:
+        # Example indented block
+        result = process_url(url)
+        return result
+    except Exception as e:
+        print(f"Error: {e}")
+        return None
      #Improved error handling for Classplus URLs
     try:
         if "classplusapp.com/drm/" in url:
@@ -176,7 +184,7 @@ async def handle_download(chat_id, url, quality, message):
     # ... [EXISTING DOWNLOAD LOGIC] ...
     
     # FIXED CLASSPLUS DRM HANDLING
-    elif "classplusapp.com/drm/" in url:
+    #elif "classplusapp.com/drm/" in url:
         try:
             mpd, keys = fix_classplus_drm(url)
             keys_string = " ".join([f"--key {key}" for key in keys])
