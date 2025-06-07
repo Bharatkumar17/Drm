@@ -121,21 +121,21 @@ async def process_queue():
             await asyncio.sleep(1)
 
 # 5. Enhanced Classplus DRM handling
-def fix_classplus_drm(url):
+#def fix_classplus_drm(url):
     # Improved error handling for Classplus URLs
-    try:
-        if "classplusapp.com/drm/" in url:
-            fixed_url = 'https://dragoapi.vercel.app/classplus?link=' + url
-            response = requests.get(fixed_url, timeout=10)
-            if response.status_code == 200:
-                data = response.json()
-                return data.get('mpd'), data.get('keys', [])
-            else:
-                raise Exception(f"Classplus API failed: {response.status_code}")
-        return url, []
-    except Exception as e:
-        logging.error(f"Classplus DRM fix error: {str(e)}")
-        return url, []
+    #try:
+        #if "classplusapp.com/drm/" in url:
+            #fixed_url = 'https://dragoapi.vercel.app/classplus?link=' + url
+            #response = requests.get(fixed_url, timeout=10)
+            #if response.status_code == 200:
+                #data = response.json()
+                #return data.get('mpd'), data.get('keys', [])
+            #else:
+                #raise Exception(f"Classplus API failed: {response.status_code}")
+        #return url, []
+    #except Exception as e:
+        #logging.error(f"Classplus DRM fix error: {str(e)}")
+        #return url, []
 
 # ==================== MODIFIED EXISTING CODE ====================
 # ... [REST OF YOUR ORIGINAL CODE REMAINS THE SAME UNTIL THE TEXT HANDLER] ...
@@ -176,14 +176,14 @@ async def handle_download(chat_id, url, quality, message):
     # ... [EXISTING DOWNLOAD LOGIC] ...
     
     # FIXED CLASSPLUS DRM HANDLING
-    elif "classplusapp.com/drm/" in url:
-        try:
-            mpd, keys = fix_classplus_drm(url)
-            keys_string = " ".join([f"--key {key}" for key in keys])
+    #elif "classplusapp.com/drm/" in url:
+        #try:
+            #mpd, keys = fix_classplus_drm(url)
+            #keys_string = " ".join([f"--key {key}" for key in keys])
             # Continue with decryption...
-        except Exception as e:
-            await message.edit(f"❌ Classplus DRM error:\n{str(e)}")
-            return
+        #except Exception as e:
+            #await message.edit(f"❌ Classplus DRM error:\n{str(e)}")
+            #return
     
     # ... [REST OF DOWNLOAD LOGIC] ...
     
